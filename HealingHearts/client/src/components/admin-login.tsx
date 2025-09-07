@@ -7,11 +7,11 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Lock, LogOut } from 'lucide-react';
 
 interface AdminLoginProps {
-  onLogin: (isLoggedIn: boolean) => void;
-  isLoggedIn: boolean;
+  onClose: () => void;
+  onLoginSuccess: (success: boolean) => void;
 }
 
-export function AdminLogin({ onLogin, isLoggedIn }: AdminLoginProps) {
+export function AdminLogin({ onClose, onLoginSuccess }: AdminLoginProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ export function AdminLogin({ onLogin, isLoggedIn }: AdminLoginProps) {
       });
 
       if (response.ok) {
-        onLogin(true);
+        onLoginSuccess(true);
         setPassword('');
       } else {
         const data = await response.json();
@@ -44,74 +44,59 @@ export function AdminLogin({ onLogin, isLoggedIn }: AdminLoginProps) {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-      });
-      onLogin(false);
-    } catch (err) {
-      console.error('Logout failed:', err);
-    }
-  };
-
-  if (isLoggedIn) {
-    return (
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Lock className="h-4 w-4" />
-        Admin Mode
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleLogout}
-        >
-          <LogOut className="h-4 w-4 mr-1" />
-          Logout
-        </Button>
-      </div>
-    );
-  }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Lock className="h-5 w-5" />
-          Admin Login
-        </CardTitle>
-        <CardDescription>
-          Enter the admin password to manage content
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter admin password"
-              disabled={isLoading}
-            />
-          </div>
-          
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-          
-          <Button 
-            type="submit" 
-            className="w-full" 
-            disabled={isLoading || !password}
-          >
-            {isLoading ? 'Logging in...' : 'Login'}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Lock className="h-5 w-5" />
+            Admin Login
+          </CardTitle>
+          <CardDescription>
+            Enter the admin password to manage content
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter admin password"
+                disabled={isLoading}
+              />
+            </div>
+            
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
+            <div className="flex gap-2">
+              <Button 
+                type="submit" 
+                className="flex-1" 
+                disabled={isLoading || !password}
+              >
+                {isLoading ? 'Logging in...' : 'Login'}
+              </Button>
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={onClose}
+                disabled={isLoading}
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

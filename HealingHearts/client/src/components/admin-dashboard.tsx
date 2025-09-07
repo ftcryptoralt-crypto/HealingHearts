@@ -10,7 +10,11 @@ import { PlusCircle, Video, FileText, CheckCircle, Clock, Check } from 'lucide-r
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { queryClient, apiRequest } from '@/lib/queryClient';
 
-export function AdminDashboard() {
+interface AdminDashboardProps {
+  onClose: () => void;
+}
+
+export function AdminDashboard({ onClose }: AdminDashboardProps) {
   const [blogForm, setBlogForm] = useState({ title: '', content: '', author: '' });
   const [videoForm, setVideoForm] = useState({ title: '', url: '', description: '' });
   const [successMessage, setSuccessMessage] = useState('');
@@ -100,11 +104,18 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold">Admin Dashboard</h2>
-        <p className="text-muted-foreground">Manage your content and videos</p>
-      </div>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-card max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto rounded-lg">
+        <div className="p-6">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-bold">Admin Dashboard</h2>
+              <p className="text-muted-foreground">Manage your content and videos</p>
+            </div>
+            <Button variant="outline" onClick={onClose}>
+              Close
+            </Button>
+          </div>
 
       {successMessage && (
         <Alert className="mb-4">
@@ -312,6 +323,8 @@ export function AdminDashboard() {
           </Card>
         </TabsContent>
       </Tabs>
+        </div>
+      </div>
     </div>
   );
 }
