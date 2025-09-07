@@ -301,7 +301,7 @@ app.post("/api/auth/login", async (req, res) => {
     const { password } = req.body;
     
     // Simple admin password check - you can change this password
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "notmilo3455";
     
     if (password === ADMIN_PASSWORD) {
       req.session.isAdmin = true;
