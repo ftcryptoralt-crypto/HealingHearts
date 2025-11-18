@@ -1,0 +1,67 @@
+==> Cloning from https://github.com/ftcryptoralt-crypto/HealingHearts
+==> Checking out commit b85bc5149be6c48816e72eb5b362501032bdc47b in branch main
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 451B done
+#1 DONE 2.1s
+#2 [internal] load metadata for docker.io/library/node:18-alpine
+#2 ...
+#3 [auth] library/node:pull render-prod/docker-mirror-repository/library/node:pull token for us-west1-docker.pkg.dev
+#3 DONE 0.0s
+#2 [internal] load metadata for docker.io/library/node:18-alpine
+#2 DONE 2.4s
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+#5 [1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#5 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#5 ...
+#6 [internal] load build context
+#6 transferring context: 1.09MB 0.0s done
+#6 DONE 0.1s
+#5 [1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#5 extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870
+#5 extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 0.1s done
+#5 DONE 3.0s
+#5 [1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#5 extracting sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e
+#5 extracting sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 37.9s done
+#5 DONE 40.9s
+#5 [1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#5 extracting sha256:1e5a4c89cee5c0826c540ab06d4b6b491c96eda01837f430bd47f0d26702d6e3 0.1s done
+#5 extracting sha256:25ff2da83641908f65c3a74d80409d6b1b62ccfaab220b9ea70b80df5a2e0549 0.0s done
+#5 DONE 41.1s
+#7 [2/6] WORKDIR /app
+#7 DONE 0.0s
+#8 [3/6] COPY package*.json ./
+#8 DONE 0.0s
+#9 [4/6] RUN npm install
+#9 0.617 npm error code ENOENT
+#9 0.617 npm error syscall open
+#9 0.617 npm error path /app/package.json
+#9 0.617 npm error errno -2
+#9 0.617 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+#9 0.617 npm error enoent This is related to npm not being able to find a file.
+#9 0.617 npm error enoent
+#9 0.619 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-11-18T23_23_53_754Z-debug-0.log
+#9 ERROR: process "/bin/sh -c npm install" did not complete successfully: exit code: 254
+------
+ > [4/6] RUN npm install:
+0.617 npm error code ENOENT
+0.617 npm error syscall open
+0.617 npm error path /app/package.json
+0.617 npm error errno -2
+0.617 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+0.617 npm error enoent This is related to npm not being able to find a file.
+0.617 npm error enoent
+0.619 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-11-18T23_23_53_754Z-debug-0.log
+------
+Dockerfile:11
+--------------------
+   9 |     
+  10 |     # Install dependencies
+  11 | >>> RUN npm install
+  12 |     
+  13 |     # Copy source code
+--------------------
+error: failed to solve: process "/bin/sh -c npm install" did not complete successfully: exit code: 254
