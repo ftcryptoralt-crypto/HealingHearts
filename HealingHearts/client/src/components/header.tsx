@@ -49,15 +49,13 @@ export default function Header() {
             >
               FAQ
             </a>
-            {isAdmin && (
-              <a 
-                href="#blog" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                data-testid="link-blog"
-              >
-                Blog
-              </a>
-            )}
+            <a 
+              href="#blog" 
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              data-testid="link-blog"
+            >
+              Blog
+            </a>
             <a 
               href="#games" 
               className="text-muted-foreground hover:text-foreground transition-colors"

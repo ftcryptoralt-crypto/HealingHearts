@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Plus, Calendar, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAdmin } from "@/hooks/use-admin";
 import type { BlogPost } from "@shared/schema";
 
 export default function BlogSection() {
@@ -16,6 +17,7 @@ export default function BlogSection() {
   const [newContent, setNewContent] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const { toast } = useToast();
+  const { isAdmin } = useAdmin();
 
   const { data: blogPosts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog"],
@@ -89,17 +91,19 @@ export default function BlogSection() {
           </p>
         </div>
         
-        {/* Add Blog Post Button */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <Button 
-            onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-primary text-primary-foreground hover:bg-primary/90"
-            data-testid="button-add-blog"
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            {showAddForm ? 'Cancel' : 'Write New Post'}
-          </Button>
-        </div>
+        {/* Add Blog Post Button - Admin Only */}
+        {isAdmin && (
+          <div className="max-w-4xl mx-auto mb-8">
+            <Button 
+              onClick={() => setShowAddForm(!showAddForm)}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              data-testid="button-add-blog"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              {showAddForm ? 'Cancel' : 'Write New Post'}
+            </Button>
+          </div>
+        )}
         
         {/* Add Blog Form */}
         {showAddForm && (

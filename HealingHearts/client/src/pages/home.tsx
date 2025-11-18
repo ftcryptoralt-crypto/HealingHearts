@@ -46,7 +46,7 @@ export default function Home() {
       </section>
 
       <FaqSection />
-      {isAdmin && <BlogSection />}
+      <BlogSection />
       <GamesSection />
       <QuizzesSection />
       <QuotesSection />
